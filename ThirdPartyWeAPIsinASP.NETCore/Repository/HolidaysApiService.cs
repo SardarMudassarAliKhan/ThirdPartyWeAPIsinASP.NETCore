@@ -25,8 +25,18 @@ namespace ThirdPartyWeAPIsinASP.NETCore.Repository
             {
                 var stringResponse = await response.Content.ReadAsStringAsync();
 
-                result = JsonSerializer.Deserialize<List<PublicHoliday>>(stringResponse,
-                    new JsonSerializerOptions() { PropertyNamingPolicy = JsonNamingPolicy.CamelCase });
+                if(!string.IsNullOrEmpty(stringResponse))
+                {
+                    result = JsonSerializer.Deserialize<List<PublicHoliday>>(stringResponse, new JsonSerializerOptions
+                    {
+                        PropertyNameCaseInsensitive = true
+                    });
+                }
+                else
+                {
+                    return null;
+                }
+
             }
             else if (response.StatusCode == HttpStatusCode.NotFound)
             {

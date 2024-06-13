@@ -1,0 +1,1 @@
+# ThirdPartyWeAPIsinASP.NETCore
